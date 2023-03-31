@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left text-muted">
-            <p>Criado em {% now "d \d\e F \d\e Y, H:i\H" %} </p>
+            <p>Criado em {% now "d \d\e F \d\e Y, H:i" %} </p>
             <h5>Original: <a href="{{reduce.destino}}" class="color-y">{{reduce.destino}}</a></h5>
         </div>
     </div>
@@ -122,7 +122,7 @@
            {% if forloop.counter == 1 %}
               "{{ r.data }}"
               {% else %}
-              "{{ r.data }}"
+              , "{{ r.data }}"
               {% endif %}
               {% endfor %}
               ],
