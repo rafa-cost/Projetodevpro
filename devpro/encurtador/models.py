@@ -19,7 +19,7 @@ class UrlLog(models.Model):                                 #informações dos a
     user_agent = models.CharField(max_length=512, null=True, blank=True)
     host = models.CharField(max_length=512, null=True, blank=True)
     ip = models.GenericIPAddressField(null=True, blank=True)
-    url_redirect = models.ForeignKey(UrlRedirect, models.DO_NOTHING, related_name='logs') #"related_name='logs'" Qual sera o nome da propriedade se eu quiser referenciar todos os logs conectados ao UrlRedirect. Esse logs ele é a referencia que faz a ligação entre UrlLog e UrlRedirect. Aqui esta contando a quantidade de cliques.
+    url_redirect = models.ForeignKey(UrlRedirect, models.DO_NOTHING, related_name='logs') #"related_name='logs'" logs é o nome da propriedade para referenciar todos os logs conectados ao UrlRedirect. Esse logs ele é a referencia que faz a ligação entre UrlLog e UrlRedirect. Aqui esta contando a quantidade de cliques.
                                                   # ele não fara nada se por acaso eu apagar a class UrlLog"models.DO_NOTHING".
 
 
