@@ -24,7 +24,7 @@ SECRET_KEY = 'django-insecure-6zys9-gbm$t1)i=&##oxsag#@3z8#)i(0ing%0zh$rv0mvpit5
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'pure-meadow-02427.herokuapp.com']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'pure-meadow-02427.herokuapp.com']  #aqui são os locais onde estou autorizando minha aplicação ser exibida
 
 # Application definition
 
@@ -77,14 +77,14 @@ WSGI_APPLICATION = 'devpro.wsgi.application'
 database_url = os.environ.get('DATABASE_URL')
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-if database_url is None:
+if database_url is None:                  #aqui é o banco de dados local o sqlite3 e depois do else é o postgress o banco de dados do servidor heroku. Estamos usando os dois bancos
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': BASE_DIR / 'db.sqlite3',
         }
     }
-else:
+else:                                    #abaixo configurações do banco postgress
     database_url = database_url.replace('postgres://', '')
     credenciais, url = database_url.split('@')
     usuario, senha = credenciais.split(':')
@@ -135,7 +135,9 @@ USE_TZ = True
 # arquivos staticos banco de dados postgres
 STATIC_URL = '/static/'
 
-STATIC_ROOT = str(BASE_DIR / 'staticfiles')
+
+STATIC_ROOT = str(BASE_DIR / 'staticfiles')     #quando estamos mechendo com o banco de dados local (sqlite3) não precisamos fazer "python manage.py collectstatic". Agora se estamos mechendo com um banco de dados externo (ex:postgress , no heroku), ai sim precisamos fazer a configuração de "STATIC_ROOT = str(BASE_DIR / 'staticfiles')" e o rodar o "python manage.py collectstatic".
+
 
 
 # Default primary key field type

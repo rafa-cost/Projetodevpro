@@ -19,34 +19,34 @@
 <div class="container">
     <div class="row">
         <div class="offset-sm-1 col-sm-10">
-            <h1 class="font-weight-bold">URL<span class="font-weight-light color-y">Reduce</span></h1>
-            <p class="h5 mb-5 text-muted">Encurtador de URL</p>
+            <h1 class="font-weight-bold">URL<span class="font-weight-light color-y">Reduce</span></h1> <!--faz o nome principal no topo da pagina alinhado URLREDUCE-->
+            <p class="h5 mb-5 text-muted">Encurtador de URL</p> <!--paragrafo logo abaixo do titulo-->
 
         </div>
     </div>
 
     <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left text-muted">
-            <p>Criado em {% now "d \d\e F \d\e Y, H:i" %} </p>
-            <h5>Original: <a href="{{reduce.destino}}" class="color-y">{{reduce.destino}}</a></h5>
+            <p>Criado em {% now "d \d\e F \d\e Y \a\s H:i" %} </p> <!--aqui mostra o dia e horario atual. Essas configurações de dias e horarios pegamos djangoproject.com. Mais precisamente na aula 3 t21:07-->
+            <h5>Original: <a href="{{reduce.destino}}" class="color-y">{{reduce.destino}}</a></h5>  <!--o href="{{reduce.destino}}" ele direciona para o site. {{reduce.destino}} ele mostrara o endereço do site ou seja um link-->
         </div>
     </div>
 
     <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left text-muted">
-            <h3>Reduzido: <a href="{{url_reduzida}}" class="color-y">{{url_reduzida}}</a></h3>
+            <h3>Reduzido: <a href="{{url_reduzida}}" class="color-y">{{url_reduzida}}</a></h3><!--o href="{{url_reduzida}}" ele direciona para o site. {{url_reduzida}} ele mostrara o endereço do site-->
         </div>
     </div>
 
     <div class="row">
         <div class="offset-sm-1 col-sm-10 text-left">
-            <button class="btn btn-outline-primary">COPY</button>
+            <button class="btn btn-outline-primary">COPY</button>    <!--esses 2 botões estão inoperante-->
             <button class="btn btn-outline-primary">SHARE</button>
         </div>
     </div>
 
-    <h2 class="font-weight-bold mt-5">Total de Cliques: <span class="color-y">{{ total_cliques }}</span></h2>
-    <p class="text-muted">Gráfico de Cliques por Dia</p>
+    <h2 class="font-weight-bold mt-5">Total de Cliques: <span class="color-y">{{ total_cliques }}</span></h2>    <!-- "Total de Cliques:"é o titulo.{{ total_cliques }}é a variavel, que esta no views que conta o numero de acessos de todos os dias-->
+    <p class="text-muted">Gráfico de Cliques por Dia</p>  <!--subtitulo-->
     <div class="row mt-3">
         <div class="offset-sm-1 col-sm-10">
 
@@ -65,7 +65,7 @@
             <!-- Tabela -->
             <div class="panel">
                 <div class="panel-heading">
-                    <h3 class="panel-title font-weight-bold mb-3">Cliques por Dia</h3>
+                    <h3 class="panel-title font-weight-bold mb-3">Cliques por Dia</h3>   <!--mais um titulo-->
                 </div>
                 <div class="panel-body">
                     <div class="table-responsive">
@@ -78,9 +78,9 @@
                             </thead>
                             <tbody>
                             {% for r in redirecionamentos_por_data %}
-                            <tr title="Quantidades de Cliques em {{ r.data }}">
-                                <td class="text-left">{{ r.data }}</td>
-                                <td>{{ r.cliques }}</td>
+                            <tr title="Quantidades de Cliques em {{ r.data }}">   <!--esse código pelo que eu vi aqui, não esta fazendo nada-->
+                                <td class="text-left">{{ r.data }}</td>  <!-- criamos esse {{ r.data }} dentro da variavelaqui (redirecionamentos_por_data). Que vai mostrar as datas de acesso-->
+                                <td>{{ r.cliques }}</td>  <!--criamos esse {{ r.cliques }} dentro da variavel (redirecionamentos_por_data).  Aqui vai mostrar o numero de cliques do dia-->
                             </tr>
                             {% endfor %}
                             </tbody>
@@ -109,7 +109,7 @@
 
 <!-- Gráfico -->
 <script>
-      let multipleBarChart = document.getElementById('multipleBarChart').getContext('2d')
+      let multipleBarChart = document.getElementById('multipleBarChart').getContext('2d')  //esse código e o de baixo tem a ver com os graficos da pagina
 
       let myMultipleBarChart = new Chart(multipleBarChart, {
           type: 'bar',
@@ -117,24 +117,24 @@
           // Como usar a Lib ChartJS com Django -> https://medium.com/code-rocket-blog/trabalhando-com-gr%C3%A1ficos-no-django-usando-chart-js-495aa6abbe0f 
 
           data: {
-              labels: [
-              {% for r in redirecionamentos_por_data %}
-           {% if forloop.counter == 1 %}
-              "{{ r.data }}"
-              {% else %}
+              labels: [                                      //esse código abaixo e para mostrar a data dos cliques
+              {% for r in redirecionamentos_por_data %}     //destrinchando redirecionamentos_por_data
+           {% if forloop.counter == 1 %}                     //"forloop.counter == 1" ira contar de 1 por 1
+              "{{ r.data }}"                                 // r.data o primeiro imprimi sem virgula e o proximo depois do else imprimi com virgula, a partir do segundo elemento sempre tem que imprimir com a virgula // "r.data" essa variavel é referete a data, cada data de clique sera um grafico
+              {% else %}                                    // se a quantidade de datas for maior que 1 ele vai entrar nesse else
               , "{{ r.data }}"
               {% endif %}
               {% endfor %}
               ],
               datasets: [{
-                  label: "Total de Cliques por Dia",
+                  label: "Total de Cliques por Dia",       //esse texto aparece embaixo dos graficos
                   backgroundColor: '#005490',
                   borderColor: '#005490',
                   data: [
-                  {% for r in redirecionamentos_por_data %}
-           {% if forloop.counter == 1 %}
-              {{ r.cliques }}
-              {% else %}
+                  {% for r in redirecionamentos_por_data %} //destrinchando redirecionamentos_por_data
+           {% if forloop.counter == 1 %}                    //"forloop.counter == 1" ira contar de 1 por 1
+              {{ r.cliques }}                               //"r.cliques" essa variavel íra passar para cada gráfico a quantidade dos cliques por dia, tera uma regua ao lado esquerdo onde tera os numeros , e o grafico ira se alinhar com o numero correspondido.
+              {% else %}                                     // se a quantidade de cliques for maior que 1 ele vai entrar nesse else
               ,{{ r.cliques }}
               {% endif %}
               {% endfor %}],
@@ -148,7 +148,7 @@
               },
               title: {
                   display: true,
-                  //text: 'Gráfico de Cliques por Dia'
+                  //text: 'Gráfico de Cliques por Dia'     //texto que aparece em cima dos graficos
               },
               tooltips: {
                   mode: 'index',
