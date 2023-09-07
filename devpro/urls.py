@@ -20,6 +20,6 @@ from devpro.encurtador import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('<slug:slug>', views.redirecionar),              #aqui é o seguinte, ele vai receber o slug do usuario e depois direionar para a url de baixo "repatorios"
+    path('<slug:slug>', views.redirecionar),              #aqui é o seguinte, assim que o usuario clicar em 'reduce' ou 'url_reduzida', ele sera redirecionado para a pagina do slug.
     path('relatorios/<slug:slug>', views.relatorios),     # para entrar na pagina inicial tem que colocar relatorios/slug
 ]

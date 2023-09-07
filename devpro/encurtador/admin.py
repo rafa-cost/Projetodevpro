@@ -13,7 +13,7 @@ class UrlLogAdmin(admin.ModelAdmin):
     list_display = ('origem', 'criado_em', 'user_agent', 'host', 'ip', 'url_redirect')
 
 
-    def has_change_permission(self, request, obj=None):    #esses 3 campos é o seguinte na tabaela UrlLog, não pode alterar, não pode deletar e nem adicionar
+    def has_change_permission(self, request, obj=None):    #esses 3 campos é o seguinte na tabaela UrlLog, os campos não podem ser alterados, deletados e nem adicionados.
         return False
 
     def has_delete_permission(self, request, obj=None):
