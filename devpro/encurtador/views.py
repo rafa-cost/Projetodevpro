@@ -28,6 +28,9 @@ def relatorios(requisicao, slug):
     return render(requisicao, 'encurtador/relatorio.html', contexto)     #renderizando para o endereço de template e passando o contexto como parametro
 
 
+
+
+
 # Create your views here.
 def redirecionar(requisicao, slug):
     url_redirect = UrlRedirect.objects.get(slug=slug)   #estamos buscando dados no banco , aqui no caso o slug e passando para a variavel
